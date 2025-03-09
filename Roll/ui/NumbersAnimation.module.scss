@@ -1,0 +1,97 @@
+@use '@styles/variables/color';
+@use '@styles/variables/font' as font;
+@use '@styles/functions' as *;
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.lane {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+
+  &.lane0 {
+    top: 52%;
+    height: 10vh;
+  }
+
+  &.lane1 {
+    top: 38%;
+    height: 17vh;
+  }
+
+  &.lane2 {
+    top: 32%;
+    height: 10vh;
+  }
+
+  &.lane3 {
+    top: 38%;
+    height: 10vh;
+  }
+}
+
+// Стили для компонента Marquee
+:global {
+  .fast-marquee {
+    overflow: hidden !important;
+
+    & > div {
+      overflow: hidden !important;
+    }
+  }
+}
+
+.number {
+  position: relative;
+  font-family: font.$sexsmith, sans-serif;
+  font-weight: font.$weight-regular;
+  color: color.$primary-purple;
+  text-shadow: 0 0 rem(15) rgba(255, 255, 255, 0.5);
+  margin: 0 rem(50);
+  display: inline-block;
+
+  &[data-lane="0"] {
+    font-size: rem(64);
+  }
+
+  &[data-lane="1"] {
+    font-size: rem(128);
+  }
+
+  &[data-lane="2"] {
+    font-size: rem(64);
+  }
+
+  &[data-lane="3"] {
+    font-size: rem(64);
+  }
+}
+
+.tapEffect {
+  position: absolute;
+  width: rem(250);
+  height: rem(250);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.8) 15%,
+    rgba(255, 255, 255, 0.6) 30%,
+    rgba(94, 34, 111, 0.5) 50%,
+    rgba(94, 34, 111, 0) 70%);
+  pointer-events: none;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  filter: blur(rem(5));
+  mix-blend-mode: screen;
+  box-shadow: 0 0 rem(30) rem(10) rgba(255, 255, 255, 0.5);
+}
