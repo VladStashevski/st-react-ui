@@ -1,0 +1,86 @@
+@use '@styles/variables/color';
+@use '@styles/variables/font' as font;
+@use '@styles/functions' as *;
+
+.spin-wheel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  user-select: none;
+  touch-action: none;
+  color: color.$primary-purple;
+  width: var(--wheel-size, rem(140));
+  height: var(--wheel-size, rem(140));
+}
+
+.spin-wheel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px color.$primary-purple;
+  cursor: grab;
+  will-change: transform;
+  transform: rotate(var(--rotation, 0deg));
+  transform-box: border-box;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &.no-transition {
+    transition: none;
+  }
+
+  &.with-transition {
+    transition: transform 0.3s ease-out;
+  }
+}
+
+.spin-wheel-section {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transform-origin: right center;
+  transform: rotate(var(--section-rotation, 0deg));
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(to right, var(--section-color, transparent) 50%, transparent 50%);
+
+  .section-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(40);
+    height: rem(40);
+    color: color.$primary-purple;
+    font-family: font.$rf-dewi-expanded, sans-serif;
+    font-size: rem(16);
+    font-weight: font.$weight-bold;
+    letter-spacing: rem(-0.24);
+    text-transform: uppercase;
+  }
+}
+
+.active-section {
+}
+
+.active-content {
+}
+
+.spin-wheel-pointer {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: rem(50);
+  height: rem(2);
+  z-index: 10;
+  background-color: color.$primary-purple;
+  border-top-left-radius: rem(10);
+  border-bottom-left-radius: rem(10);
+}
